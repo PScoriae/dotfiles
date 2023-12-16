@@ -41,11 +41,20 @@ alias npsa="n ps -a"
 alias dpsa="docker ps -a"
 
 # git
+alias g="git"
+alias gb="git branch"
+alias gca="git commit --amend"
+alias gcma="git commit -am"
+alias gp="git push"
+alias gl="git log"
+alias gd="git diff"
+alias gpl="git pull"
+alias gr="git reset"
+alias gsh="git stash"
 alias gpum="git pull upstream master"
 alias gpu="git pull upstream"
 alias gcb="git checkout -b"
 alias gbd="git branch -D"
-alias g="git"
 alias gc="git checkout"
 
 # terraform
