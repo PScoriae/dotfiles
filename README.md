@@ -1,5 +1,4 @@
-# Pie's Dotfiles
+# My dotfiles
 
-**Work in progress**
-
-Hi! This is where I keep all my dotfiles for my Arch Linux system. If you would like to follow a guide to replicate my system, the repository is available [here](https://github.com/PScoriae/arch-config)
+This is mainly just a place for me to store my configurations so that I may replicate them across multiple environments.
+Old habits die hard.
