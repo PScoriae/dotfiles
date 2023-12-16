@@ -11,10 +11,15 @@ if type brew &>/dev/null; then
   compinit
 fi
 
+# bash
+alias ll="ls -la"
+alias sed="gsed"
+
 # brew
-alias bic="brew install --cask"
 alias bi="brew install"
+alias bic="brew install --cask"
 alias bui="brew uninstall"
+alias bup="brew upgrade"
 
 # docker/nerdctl
 alias n="nerdctl"
@@ -39,6 +44,9 @@ alias kg="kubectl get"
 alias kgpn="kubectl get pods -n"
 alias kgpa="kubectl get pods -A"
 alias kaf="kubectl apply -f"
+alias kdf="kubectl delete -f"
+alias krr="kubectl rollout restart"
+alias kak="kubectl apply -k"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
