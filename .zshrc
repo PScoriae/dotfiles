@@ -22,6 +22,7 @@ source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # bash
 alias ll="ls -la"
 alias sed="gsed"
+alias vim="nvim"
 
 # brew
 alias bi="brew install"
