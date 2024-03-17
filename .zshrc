@@ -7,6 +7,7 @@ fi
 
 export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
+export PATH="/opt/homebrew/bin:$PATH"
 
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
@@ -82,6 +83,8 @@ alias kpf="kubectl port-forward"
 alias klo="kubectl logs -f"
 alias ksys="kubectl --namespace=kube-system"
 alias kall="kubectl get all --all-namespaces"
+
+eval "$(zoxide init --cmd cd zsh)"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
