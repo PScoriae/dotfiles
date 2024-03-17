@@ -12,7 +12,7 @@ tools=("git" "gh" "go" "jq" "yq" "gnu-sed" "k9s" "kubectx" "kubernetes-cli" "kus
 zshStuff=("zsh-completions" "zsh-autosuggestions" "zsh-syntax-highlighting" "powerlevel10k")
 
 # List of favorite tools
-favTools=("youtube-dl")
+favTools=("yt-dlp")
 
 # List of casks
 casks=("discord" "github" "iina" "iterm2" "linearmouse" "obsidian" "postman" "tailscale" "visual-studio-code")
