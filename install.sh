@@ -6,7 +6,7 @@ if ! command -v brew &> /dev/null; then
 fi
 
 # List of common developer tools
-tools=("git" "gh" "go" "jq" "yq" "gnu-sed" "k9s" "kubectx" "kubernetes-cli" "kustomize" "nerdctl" "neovim" "node" "terraform" "tfenv" "zoxide" "helm" "hugo")
+tools=("git" "gh" "go" "jq" "yq" "gnu-sed" "k9s" "kubectx" "kubernetes-cli" "kustomize" "nerdctl" "neovim" "node" "terraform" "tfenv" "zoxide" "thefuck" "helm" "hugo")
 
 # List of zsh stuff
 zshStuff=("zsh-completions" "zsh-autosuggestions" "zsh-syntax-highlighting" "powerlevel10k")

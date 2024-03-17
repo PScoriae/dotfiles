@@ -40,6 +40,9 @@ alias bic="brew install --cask"
 alias bui="brew uninstall"
 alias bup="brew upgrade"
 
+# thefuck
+eval $(thefuck --alias)
+
 # docker/nerdctl
 alias n="nerdctl"
 alias docker="nerdctl"
