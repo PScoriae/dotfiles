@@ -43,6 +43,9 @@ alias bup="brew upgrade"
 # thefuck
 eval $(thefuck --alias)
 
+# fzf
+eval "$(fzf --zsh)"
+
 # docker/nerdctl
 alias n="nerdctl"
 alias docker="nerdctl"
