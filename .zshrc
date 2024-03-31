@@ -72,6 +72,7 @@ alias gc="git checkout"
 # terraform
 alias tf="terraform"
 alias tfaa="terraform apply -auto-approve"
+alias tfp="terraform plan"
 
 # kubectl
 alias k="kubectl"
