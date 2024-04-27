@@ -15,7 +15,16 @@ zshStuff=("zsh-completions" "zsh-autosuggestions" "zsh-syntax-highlighting" "pow
 favTools=("yt-dlp")
 
 # List of casks
-casks=("discord" "github" "iina" "iterm2" "linearmouse" "obsidian" "postman" "tailscale" "visual-studio-code")
+casks=(
+  "discord"
+  "github"
+  "iina"
+  "iterm2"
+  "linearmouse"
+  "postman"
+  "tailscale"
+  "visual-studio-code"
+)
 
 # Install common developer tools
 for tool in "${tools[@]}"; do
