@@ -35,6 +35,7 @@ alias vim="nvim"
 alias zshrc="vim ~/.zshrc"
 
 # brew
+alias b="brew"
 alias bi="brew install"
 alias bic="brew install --cask"
 alias bui="brew uninstall"
