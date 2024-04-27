@@ -16,7 +16,7 @@ source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# bash
+# zsh
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
