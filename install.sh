@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # Install Homebrew if not already installed
 if ! command -v brew &>/dev/null; then
