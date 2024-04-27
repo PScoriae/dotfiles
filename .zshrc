@@ -33,7 +33,6 @@ alias ll="ls -la"
 alias sed="gsed"
 alias vim="nvim"
 alias zshrc="vim ~/.zshrc"
-alias srczsh="source ~/.zshrc"
 
 # brew
 alias bi="brew install"
