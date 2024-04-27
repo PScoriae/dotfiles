@@ -85,6 +85,7 @@ alias klo="kubectl logs -f"
 alias ksys="kubectl --namespace=kube-system"
 alias kall="kubectl get all --all-namespaces"
 
+# alias cd to use zoxide
 eval "$(zoxide init --cmd cd zsh)"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
