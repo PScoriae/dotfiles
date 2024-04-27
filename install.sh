@@ -68,3 +68,4 @@ for cask in "${casks[@]}"; do
 done
 
 echo "Installation complete."
+exit 0
