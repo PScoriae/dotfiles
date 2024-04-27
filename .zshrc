@@ -47,10 +47,7 @@ eval $(thefuck --alias)
 # fzf
 eval "$(fzf --zsh)"
 
-# docker/nerdctl
-alias n="nerdctl"
-alias docker="nerdctl"
-alias npsa="n ps -a"
+# docker
 alias dpsa="docker ps -a"
 
 # git
