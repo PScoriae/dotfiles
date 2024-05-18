@@ -42,7 +42,6 @@ casks=(
   "iina"
   "iterm2"
   "linearmouse"
-  "postman"
   "tailscale"
   "visual-studio-code"
 )
