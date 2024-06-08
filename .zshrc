@@ -17,7 +17,20 @@ source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# zsh
+# History config
+HISTSIZE=10000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase # duplicates are removed
+setopt appendhistory # append commands instead of overwrite
+setopt sharehistory # share history across all shell sessions
+setopt hist_ignore_space # commands prepended with a space are excluded
+setopt hist_ignore_all_dups # prevent dups from being recorded
+setopt hist_save_no_dups # same
+setopt hist_ignore_dups # same
+setopt hist_find_no_dups # prevent dups from being shown when searched
+
+# zsh aliases
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
