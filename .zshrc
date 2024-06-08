@@ -1,6 +1,7 @@
 export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
+export PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
 
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
@@ -22,7 +23,7 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias c="clear"
-alias ll="ls -la"
+alias ll="ls -lah"
 alias sed="gsed"
 alias vim="nvim"
 alias zshrc="vim ~/.zshrc"
