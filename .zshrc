@@ -17,6 +17,10 @@ source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+# Keybindings
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
+
 # History config
 HISTSIZE=10000
 HISTFILE=~/.zsh_history
