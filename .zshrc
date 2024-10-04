@@ -44,6 +44,7 @@ alias ll="ls -lah --color"
 alias sed="gsed"
 alias vim="nvim"
 alias zshrc="vim ~/.zshrc"
+alias date="gdate"
 
 # brew
 alias b="brew"
@@ -77,6 +78,7 @@ alias gpu="git pull upstream"
 alias gcb="git checkout -b"
 alias gbd="git branch -D"
 alias gc="git checkout"
+alias gbda="git branch | grep -vE '^(master|main|\*)' | xargs git branch -D"
 
 # terraform
 alias tf="terraform"
