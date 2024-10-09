@@ -80,10 +80,10 @@ alias gbd="git branch -D"
 alias gc="git checkout"
 alias gbda="git branch | grep -vE '^(master|main|\*)' | xargs git branch -D"
 
-# terraform
-alias tf="terraform"
-alias tfaa="terraform apply -auto-approve"
-alias tfp="terraform plan"
+# terraform/tofu
+alias tf="tofu"
+alias tfaa="tofu apply -auto-approve"
+alias tfp="tofu plan"
 
 # kubectl
 alias k="kubectl"
