@@ -23,14 +23,14 @@ bindkey '^n' history-search-forward
 HISTSIZE=10000
 HISTFILE=~/.zsh_history
 SAVEHIST=$HISTSIZE
-HISTDUP=erase # duplicates are removed
-setopt appendhistory # append commands instead of overwrite
-setopt sharehistory # share history across all shell sessions
-setopt hist_ignore_space # commands prepended with a space are excluded
+HISTDUP=erase               # duplicates are removed
+setopt appendhistory        # append commands instead of overwrite
+setopt sharehistory         # share history across all shell sessions
+setopt hist_ignore_space    # commands prepended with a space are excluded
 setopt hist_ignore_all_dups # prevent dups from being recorded
-setopt hist_save_no_dups # same
-setopt hist_ignore_dups # same
-setopt hist_find_no_dups # prevent dups from being shown when searched
+setopt hist_save_no_dups    # same
+setopt hist_ignore_dups     # same
+setopt hist_find_no_dups    # prevent dups from being shown when searched
 
 # zsh aliases
 alias ..="cd .."
