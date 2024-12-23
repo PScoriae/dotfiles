@@ -79,9 +79,9 @@ alias gc="git checkout"
 alias gbda="git branch | grep -vE '^(master|main|\*)' | xargs git branch -D"
 
 # terraform/tofu
-alias tf="tofu"
-alias tfaa="tofu apply -auto-approve"
-alias tfp="tofu plan"
+alias ta="tofu"
+alias taa="tofu apply -auto-approve"
+alias tp="tofu plan"
 
 # kubectl
 alias k="kubectl"
