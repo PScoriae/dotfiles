@@ -79,7 +79,7 @@ alias gc="git checkout"
 alias gbda="git branch | grep -vE '^(master|main|\*)' | xargs git branch -D"
 
 # terraform/tofu
-alias ta="tofu"
+alias t="tofu"
 alias taa="tofu apply -auto-approve"
 alias tp="tofu plan"
 
