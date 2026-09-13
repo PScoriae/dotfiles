@@ -1,6 +1,10 @@
 # macOS
 .DS_Store
-*.DS_Store
+
+# editor / shell noise
+*.swp
+*~
+.zsh_history
 
 # opencode runtime — never commit (regenerable / machine state)
 opencode/.config/opencode/node_modules/
