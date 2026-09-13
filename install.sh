@@ -1,76 +1,18 @@
 #!/bin/zsh
+set -euo pipefail
+
+DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 # Install Homebrew if not already installed
 if ! command -v brew &>/dev/null; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-# List of common developer tools
-tools=(
-  "git"
-  "gh"
-  "go"
-  "jq"
-  "yq"
-  "gnu-sed"
-  "k9s"
-  "kubectx"
-  "kubernetes-cli"
-  "kustomize"
-  "helm"
-  "colima"
-  "neovim"
-  "node"
-  "tofuenv"
-  "zoxide"
-  "thefuck"
-  "hugo"
-  "stow"
-  "opencode"
-)
+# Idempotent package install (adds fzf + coreutils over the old tool lists)
+brew bundle --file="$DOTFILES_DIR/Brewfile"
 
-# List of zsh stuff
-zshStuff=("zsh-completions" "zsh-autosuggestions" "zsh-syntax-highlighting" "powerlevel10k")
-
-# List of favorite tools
-favTools=("yt-dlp")
-
-# List of casks
-casks=(
-  "discord"
-  "github"
-  "iina"
-  "iterm2"
-  "linearmouse"
-  "tailscale"
-  "visual-studio-code"
-)
-
-# Install common developer tools
-for tool in "${tools[@]}"; do
-  brew install "$tool"
-done
-
-# Install zsh stuff
-for zsh in "${zshStuff[@]}"; do
-  brew install "$zsh"
-done
-
-# Install favorite tools
-for tool in "${favTools[@]}"; do
-  brew install "$tool"
-done
-
-# Install casks
-for cask in "${casks[@]}"; do
-  brew install --cask "$cask"
-done
-
-# Link stow packages (opencode config -> ~/.config/opencode)
-if command -v stow &>/dev/null; then
-  DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
-  stow -d "$DOTFILES_DIR" -t ~ opencode
-fi
+# Link stow packages (zsh/.zshrc -> ~/.zshrc, opencode config -> ~/.config/opencode)
+stow -R -d "$DOTFILES_DIR" -t ~ opencode zsh
 
 echo "Installation complete."
-exit 0
