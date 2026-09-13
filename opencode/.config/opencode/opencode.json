@@ -1,0 +1,21 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": ["@dietrichgebert/ponytail"],
+  "agent": {
+    "coder": {
+      "description": "Writes code and self-tests. Use for implementation tasks.",
+      "mode": "subagent",
+      "model": "opencode/muse-spark-1.3-contributor-free",
+      "prompt": "You are the CODER. Implement tasks from the orchestrator. Always self-check: run tests, lint, and basic sanity before handing off. Return files changed, diffs, and verification steps. Do not do deep review — leave correctness/security/edge-case review to the critic."
+    },
+    "critic": {
+      "description": "Reviews tasks and code, never writes code. Use for correctness/security review.",
+      "mode": "subagent",
+      "model": "opencode/big-pickle",
+      "permission": {
+        "edit": "deny"
+      },
+      "prompt": "You are the CRITIC (big pickle). Never write code. Review coder diffs for correctness, security, edge cases, simplicity. Return issues as [blocker/major/minor/nit] with location and fix direction."
+    }
+  }
+}

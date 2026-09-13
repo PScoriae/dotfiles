@@ -1,0 +1,8 @@
+# macOS
+.DS_Store
+*.DS_Store
+
+# opencode runtime — never commit (regenerable / machine state)
+opencode/.config/opencode/node_modules/
+opencode/.config/opencode/package-lock.json
+opencode/.config/opencode/bun.lock

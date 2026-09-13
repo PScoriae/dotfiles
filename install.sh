@@ -26,6 +26,7 @@ tools=(
   "thefuck"
   "hugo"
   "stow"
+  "opencode"
 )
 
 # List of zsh stuff
@@ -64,6 +65,12 @@ done
 for cask in "${casks[@]}"; do
   brew install --cask "$cask"
 done
+
+# Link stow packages (opencode config -> ~/.config/opencode)
+if command -v stow &>/dev/null; then
+  DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
+  stow -d "$DOTFILES_DIR" -t ~ opencode
+fi
 
 echo "Installation complete."
 exit 0
