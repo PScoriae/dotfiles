@@ -17,7 +17,6 @@ brew "zsh-syntax-highlighting"
 brew "powerlevel10k"
 brew "fzf"
 brew "zoxide"
-brew "thefuck"
 
 # GNU tools (gls/gsed/gdate used by .zshrc aliases)
 brew "coreutils"

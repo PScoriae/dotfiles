@@ -1,3 +1,9 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input must go above this block.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 export GOPATH="$HOME/go"
 
 # Homebrew (Apple Silicon / Intel / Linux)
@@ -22,11 +28,17 @@ case ":$PATH:" in
   *) export PATH="$HOME/.local/bin:$PATH" ;;
 esac
 
+# Completion init: full security check at most once a day, cached otherwise
 if command -v brew &>/dev/null; then
-  FPATH="$(brew --prefix)/share/zsh-completions:$FPATH"
-  autoload -Uz compinit
-  [[ -d ~/.cache/zsh ]] || mkdir -p ~/.cache/zsh
+  FPATH="$HOMEBREW_PREFIX/share/zsh-completions:$FPATH"
+fi
+autoload -Uz compinit
+[[ -d ~/.cache/zsh ]] || mkdir -p ~/.cache/zsh
+if [[ -n ~/.cache/zsh/zcompdump(#qN.mh+24) ]]; then
   compinit -u -d ~/.cache/zsh/zcompdump
+  touch ~/.cache/zsh/zcompdump  # compinit skips the rewrite when nothing changed
+else
+  compinit -C -d ~/.cache/zsh/zcompdump
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -79,9 +91,6 @@ alias bi="brew install"
 alias bic="brew install --cask"
 alias bui="brew uninstall"
 alias bup="brew upgrade"
-
-# thefuck
-command -v thefuck &>/dev/null && eval "$(thefuck --alias)"
 
 # fzf
 command -v fzf &>/dev/null && eval "$(fzf --zsh)"
