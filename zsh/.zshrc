@@ -58,13 +58,10 @@ bindkey '^n' history-search-forward
 HISTSIZE=10000
 HISTFILE=~/.zsh_history
 SAVEHIST=$HISTSIZE
-HISTDUP=erase               # duplicates are removed
-setopt appendhistory        # append commands instead of overwrite
 setopt sharehistory         # share history across all shell sessions
 setopt hist_ignore_space    # commands prepended with a space are excluded
 setopt hist_ignore_all_dups # prevent dups from being recorded
 setopt hist_save_no_dups    # same
-setopt hist_ignore_dups     # same
 setopt hist_find_no_dups    # prevent dups from being shown when searched
 
 # zsh aliases
@@ -73,9 +70,7 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias c="clear"
-if command -v gls &>/dev/null; then
-  alias ll="gls -lah --color"
-elif ls --color -d . &>/dev/null; then
+if ls --color -d . &>/dev/null; then
   alias ll="ls -lah --color"
 else
   alias ll="ls -lah"
@@ -83,7 +78,6 @@ fi
 command -v gsed &>/dev/null && alias sed="gsed"
 command -v nvim &>/dev/null && alias vim="nvim"
 alias zshrc="vim ~/.zshrc"
-command -v gdate &>/dev/null && alias date="gdate"
 
 # brew
 alias b="brew"
@@ -114,12 +108,12 @@ alias gpu="git pull upstream"
 alias gcb="git checkout -b"
 alias gbd="git branch -D"
 alias gc="git checkout"
-alias gbda="git branch | grep -vE '^(master|main|\*)' | xargs git branch -D"
+alias gbda="git branch | grep -vE '^[*+]|^  (main|master)$' | xargs git branch -D"
 
-# terraform/tofu
-alias t="terraform"
-alias taa="terraform apply -auto-approve"
-alias tp="terraform plan"
+# tofu
+alias t="tofu"
+alias taa="tofu apply -auto-approve"
+alias tp="tofu plan"
 
 # kubectl
 alias k="kubectl"
@@ -144,14 +138,6 @@ alias kall="kubectl get all --all-namespaces"
 # alias cd to use zoxide
 command -v zoxide &>/dev/null && eval "$(zoxide init --cmd cd zsh)"
 
-# BEGIN savemytokens-path
-# Keep ~/.local/bin on PATH so claude-smt and smt work in this shell.
-case ":$PATH:" in
-  *":$HOME/.local/bin:"*) ;;
-  *) export PATH="$HOME/.local/bin:$PATH" ;;
-esac
-# END savemytokens-path
-
 # Trust Gen Digital/Zscaler SSL-inspection CA for Node-based tools
-[[ -f "$HOME/Downloads/ZScerts.pem" ]] && export NODE_EXTRA_CA_CERTS="$HOME/Downloads/ZScerts.pem"
+[[ -f "$HOME/.config/certs/ZScerts.pem" ]] && export NODE_EXTRA_CA_CERTS="$HOME/.config/certs/ZScerts.pem"
 [[ -x "${HOMEBREW_PREFIX:-/opt/homebrew}/opt/mysql-client@8.0/bin/mysql" ]] && alias mysql80="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/mysql-client@8.0/bin/mysql"
