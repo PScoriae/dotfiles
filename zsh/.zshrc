@@ -1,3 +1,6 @@
+# Startup profiling: ZPROF=1 zsh -i -c exit
+[[ -n "${ZPROF:-}" ]] && zmodload zsh/zprof
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input must go above this block.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
@@ -5,41 +8,49 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 export GOPATH="$HOME/go"
+typeset -U path fpath  # drop duplicate entries that nested shells add again
+[[ -d ~/.cache/zsh ]] || mkdir -p ~/.cache/zsh
 
-# Homebrew (Apple Silicon / Intel / Linux)
-if command -v brew &>/dev/null; then
-  eval "$(brew shellenv)"
-elif [[ -x /opt/homebrew/bin/brew ]]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-elif [[ -x /usr/local/bin/brew ]]; then
-  eval "$(/usr/local/bin/brew shellenv)"
+# Like `eval "$(cmd args)"`, but caches the output. Each fork costs ~10-45 ms.
+# The cache refreshes when the binary's resolved path (its Cellar version) changes.
+# ponytail: brew's path has no version; `rm ~/.cache/zsh/*-init.zsh` to force a refresh.
+_cached_eval() {
+  local bin=${commands[$1]:A} cache=~/.cache/zsh/$1-init.zsh first
+  [[ -n $bin ]] || return 0
+  [[ -r $cache ]] && read -r first < $cache
+  [[ $first == "# $bin" ]] || { print -r -- "# $bin"; "$@" } >| $cache
+  source $cache
+}
+
+# Homebrew (Apple Silicon / Intel)
+if [[ -z ${commands[brew]} ]]; then
+  for _b in /opt/homebrew/bin /usr/local/bin; do
+    [[ -x $_b/brew ]] && { path=($_b $path); break }
+  done
+  unset _b
 fi
+_cached_eval brew shellenv
 
 # GNU coreutils without freezing the system PATH
 if [[ -n "${HOMEBREW_PREFIX:-}" && -d "$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin" ]]; then
   export PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
 fi
-case ":$PATH:" in
-  *":$HOME/go/bin:"*) ;;
-  *) export PATH="$PATH:$HOME/go/bin" ;;
-esac
-case ":$PATH:" in
-  *":$HOME/.local/bin:"*) ;;
-  *) export PATH="$HOME/.local/bin:$PATH" ;;
-esac
+path=(~/.local/bin $path ~/go/bin)
 
 # Completion init: full security check at most once a day, cached otherwise
 if command -v brew &>/dev/null; then
   FPATH="$HOMEBREW_PREFIX/share/zsh-completions:$FPATH"
 fi
 autoload -Uz compinit
-[[ -d ~/.cache/zsh ]] || mkdir -p ~/.cache/zsh
-if [[ -n ~/.cache/zsh/zcompdump(#qN.mh+24) ]]; then
+# Glob into an array: [[ ]] ignores glob qualifiers unless extendedglob is set
+_stale_dump=(~/.cache/zsh/zcompdump(N.mh+24))
+if (( $#_stale_dump )); then
   compinit -u -d ~/.cache/zsh/zcompdump
   touch ~/.cache/zsh/zcompdump  # compinit skips the rewrite when nothing changed
 else
-  compinit -C -d ~/.cache/zsh/zcompdump
+  compinit -C -d ~/.cache/zsh/zcompdump  # also builds the dump when it is missing
 fi
+unset _stale_dump
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -70,11 +81,7 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias c="clear"
-if ls --color -d . &>/dev/null; then
-  alias ll="ls -lah --color"
-else
-  alias ll="ls -lah"
-fi
+alias ll="ls -lah --color"  # GNU ls and macOS 13+ ls both accept --color
 command -v gsed &>/dev/null && alias sed="gsed"
 command -v nvim &>/dev/null && alias vim="nvim"
 alias zshrc="vim ~/.zshrc"
@@ -87,7 +94,7 @@ alias bui="brew uninstall"
 alias bup="brew upgrade"
 
 # fzf
-command -v fzf &>/dev/null && eval "$(fzf --zsh)"
+_cached_eval fzf --zsh
 
 # docker
 alias dpsa="docker ps -a"
@@ -136,8 +143,11 @@ alias ksys="kubectl --namespace=kube-system"
 alias kall="kubectl get all --all-namespaces"
 
 # alias cd to use zoxide
-command -v zoxide &>/dev/null && eval "$(zoxide init --cmd cd zsh)"
+_cached_eval zoxide init --cmd cd zsh
 
 # Trust Gen Digital/Zscaler SSL-inspection CA for Node-based tools
 [[ -f "$HOME/.config/certs/ZScerts.pem" ]] && export NODE_EXTRA_CA_CERTS="$HOME/.config/certs/ZScerts.pem"
 [[ -x "${HOMEBREW_PREFIX:-/opt/homebrew}/opt/mysql-client@8.0/bin/mysql" ]] && alias mysql80="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/mysql-client@8.0/bin/mysql"
+
+# Print the startup profile (see top of file); `if` keeps the rc exit status 0
+if [[ -n "${ZPROF:-}" ]]; then zprof; fi
