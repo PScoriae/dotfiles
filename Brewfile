@@ -38,6 +38,8 @@ brew "hugo"
 brew "yt-dlp"
 
 # Apps
+cask "chatgpt"
+cask "codex"
 cask "discord"
 cask "github"
 cask "iina"
